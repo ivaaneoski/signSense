@@ -111,13 +111,3 @@ As this application relies purely on 2D geometric and hand-state heuristic condi
 * **Finger Crossovers:** The **R** sign is approximated best-effort and will classify largely based on the index and middle fingers extending, which mimics the **H** and **U** states heavily.
 * **Camera Angle:** For maximum accuracy, keep your hand squared and flat directed to the camera so that lateral overlapping (e.g., crossing thumbs) is visibly clear to the MediaPipe tracker.
 
----
-
-## 🧠 Extending the Classifier (Machine Learning)
-
-SignSense currently operates purely using Euclidean geometry and simple logical comparisons evaluated on every frame. If you wish to implement a trained Machine Learning model (e.g., Random Forest, SVM, or Neural Network) in the future:
-
-1. Locate the `HandClassifier.classify()` method inside `sign_language_recognition.py`.
-2. Intercept the sequence of normalized `landmarks` returned by the MediaPipe feed.
-3. Flatten and feed these scaled arrays directly into your trained predictive model payload.
-4. Replace the explicit logical constraints evaluation step within the script with `model.predict(landmarks)`. Ensure it returns a string format mirroring the current output to effortlessly bind down to the `LetterHistory` debouncing logic organically.
