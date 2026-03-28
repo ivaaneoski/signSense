@@ -1,11 +1,11 @@
-# SignSense - Real-Time ASL Recognition
+# SignLangSense - Real-Time Sign Language Recognition
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)](https://python.org)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.8+-green?logo=opencv&logoColor=white)](https://opencv.org/)
 [![MediaPipe](https://img.shields.io/badge/MediaPipe-<0.10.15-orange?logo=google&logoColor=white)](https://developers.google.com/mediapipe)
 [![NumPy](https://img.shields.io/badge/Numpy->=1.24.0-blue?logo=numpy&logoColor=white)](https://numpy.org/)
 
-SignSense is a real-time American Sign Language (ASL) recognition desktop application built in Python. Designed as a precise, developer-focused tooling interface, it uses a live webcam feed to detect, classify, and track static alphabet signs.
+SignLangSense is a real-time American Sign Language (ASL) recognition desktop application built in Python. Designed as a precise, developer-focused tooling interface, it uses a live webcam feed to detect, classify, and track static alphabet signs.
 
 The visual identity is minimal, functional, and clean—information is presented securely via carefully defined overlay panels stacked over an unmodified local webcam video feed. Built without any external ML models, its recognition engine relies entirely on MediaPipe hand landmark tracking and heuristic geometric rules.
 
