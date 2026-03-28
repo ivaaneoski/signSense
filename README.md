@@ -1,4 +1,4 @@
-# 🤟 SignSense - Real-Time ASL Recognition
+# SignSense - Real-Time ASL Recognition
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)](https://python.org)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.8+-green?logo=opencv&logoColor=white)](https://opencv.org/)
