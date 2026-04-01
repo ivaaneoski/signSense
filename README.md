@@ -1,4 +1,4 @@
-# 🤟 SignSense - Real-Time ASL Recognition
+# SignSense - Real-Time Sign Language Recognition
 
 [![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python&logoColor=white)](https://python.org)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.8+-green?logo=opencv&logoColor=white)](https://opencv.org/)
@@ -7,7 +7,7 @@
 
 SignSense is a real-time American Sign Language (ASL) recognition desktop application built in Python. Designed as a precise, developer-focused tooling interface, it uses a live webcam feed to detect, classify, and track static alphabet signs.
 
-The visual identity is minimal, functional, and clean—information is presented securely via carefully defined overlay panels stacked over an unmodified local webcam video feed. Built without any external ML models, its recognition engine relies entirely on MediaPipe hand landmark tracking and heuristic geometric rules.
+The visual identity is minimal, functional, and clean. It features interactive overlay panels, realtime probability confidence scoring, left-and-right hand tracking, and a dedicated Word Builder mode for text assembly. Built without any external ML models, its recognition engine relies on deep 3D MediaPipe hand landmark spatial tracking and heuristic geometric rules.
 
 ---
 
@@ -79,8 +79,9 @@ While the webcam window is focused, you can use the following standard keyboard 
 | Key | Action |
 |:---:|---|
 | **`Q`** / **`ESC`** | Quit the application cleanly |
-| **`SPACE`** | Pause / resume the webcam feed |
-| **`BACKSPACE`** | Clear the letter history bar |
+| **`TAB`** | Toggle Word Builder Mode (text assembly) on/off |
+| **`SPACE`** | Pause feed (Standard) OR Add word to sentence (Word Builder Mode) |
+| **`BACKSPACE`** | Clear history (Standard) OR Delete last letter (Word Builder Mode) |
 | **`S`** | Save a timestamped screenshot of the current frame to `./screenshots/` |
 
 ---
@@ -106,18 +107,8 @@ The application supports most static ASL alphabet letters and some common gestur
 
 ## ⚠️ Known Limitations & Ambiguities
 
-As this application relies purely on 2D geometric and hand-state heuristic conditions, consider the following limitations:
-* **2D Projection Ambiguities:** Letters sharing similar topological profiles in 2D (like U, H, and R, or C and E) might exhibit slight instability if hand angles lack depth dimension visibility on standard webcams.
+While this application successfully mitigates flat planar tracking issues by utilizing MediaPipe's true 3D spatial (Z-axis) vector measurements and left-hand mirroring, consider the following limitations:
+
 * **Finger Crossovers:** The **R** sign is approximated best-effort and will classify largely based on the index and middle fingers extending, which mimics the **H** and **U** states heavily.
-* **Camera Angle:** For maximum accuracy, keep your hand squared and flat directed to the camera so that lateral overlapping (e.g., crossing thumbs) is visibly clear to the MediaPipe tracker.
-
----
-
-## 🧠 Extending the Classifier (Machine Learning)
-
-SignSense currently operates purely using Euclidean geometry and simple logical comparisons evaluated on every frame. If you wish to implement a trained Machine Learning model (e.g., Random Forest, SVM, or Neural Network) in the future:
-
-1. Locate the `HandClassifier.classify()` method inside `sign_language_recognition.py`.
-2. Intercept the sequence of normalized `landmarks` returned by the MediaPipe feed.
-3. Flatten and feed these scaled arrays directly into your trained predictive model payload.
-4. Replace the explicit logical constraints evaluation step within the script with `model.predict(landmarks)`. Ensure it returns a string format mirroring the current output to effortlessly bind down to the `LetterHistory` debouncing logic organically.
+* **Camera Angle:** For maximum accuracy, keep your hand relatively squared. Extreme side-profiles may occlude key joints (like pinky PIPs) from the MediaPipe tracker.
+* **Lighting:** Extreme shadows can occasionally disrupt contour extraction, resulting in fluctuating confidence scores against predefined prototype baselines.
