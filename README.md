@@ -11,7 +11,7 @@ The visual identity is minimal, functional, and clean. It features interactive o
 
 ---
 
-## 🛠️ Built With (Technology Stack)
+## Built With (Technology Stack)
 This project is built using the following core technologies:
 * **Python 3.12**: The core programming language used for the application logic. *(Note: Python 3.12 is explicitly required because newer versions of MediaPipe on Python 3.13+ drop support for the legacy `solutions` API used in this project).*
 * **OpenCV (`opencv-python`)**: Used for interfacing with the webcam, capturing real-time video frames, and rendering the custom heads-up display (HUD) overlay and interface elements.
@@ -21,7 +21,7 @@ This project is built using the following core technologies:
 
 ---
 
-## 🚀 Step-by-Step Installation Guide
+## Step-by-Step Installation Guide
 
 Follow these steps to get the application running on your local machine:
 
@@ -86,7 +86,7 @@ While the webcam window is focused, you can use the following standard keyboard 
 
 ---
 
-## ✋ Supported Signs Reference
+## Supported Signs Reference
 
 The application supports most static ASL alphabet letters and some common gestures.
 
@@ -113,12 +113,3 @@ While this application successfully mitigates flat planar tracking issues by uti
 * **Camera Angle:** For maximum accuracy, keep your hand squared and flat directed to the camera so that lateral overlapping (e.g., crossing thumbs) is visibly clear to the MediaPipe tracker.
 
 ---
-
-## 🧠 Extending the Classifier (Machine Learning)
-
-SignSense currently operates purely using Euclidean geometry and simple logical comparisons evaluated on every frame. If you wish to implement a trained Machine Learning model (e.g., Random Forest, SVM, or Neural Network) in the future:
-
-1. Locate the `HandClassifier.classify()` method inside `sign_language_recognition.py`.
-2. Intercept the sequence of normalized `landmarks` returned by the MediaPipe feed.
-3. Flatten and feed these scaled arrays directly into your trained predictive model payload.
-4. Replace the explicit logical constraints evaluation step within the script with `model.predict(landmarks)`. Ensure it returns a string format mirroring the current output to effortlessly bind down to the `LetterHistory` debouncing logic organically.
